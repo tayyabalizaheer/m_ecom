@@ -121,12 +121,12 @@ class GeneralSettingController extends Controller
 
         $data->update($input);
         //--- Logic Section Ends
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
 
-        Artisan::call('cache:clear');
-        Artisan::call('config:clear');
-        Artisan::call('route:clear');
-        Artisan::call('view:clear');
+        // Artisan::call('cache:clear');
+        // Artisan::call('config:clear');
+        // Artisan::call('route:clear');
+        // Artisan::call('view:clear');
 
         //--- Redirect Section
         $msg = 'Data Updated Successfully.';
@@ -150,8 +150,8 @@ class GeneralSettingController extends Controller
         $input = $request->all();
         $curr = Currency::where('is_default','=',1)->first();
         $data = Generalsetting::findOrFail(1);
-        $prev = $data->molly_key;  
-        
+        $prev = $data->molly_key;
+
         if ($request->vendor_ship_info == ""){
             $input['vendor_ship_info'] = 0;
         }
@@ -175,14 +175,14 @@ class GeneralSettingController extends Controller
         }
         $input['fixed_commission'] = $input['fixed_commission'] / $curr->value;
         $data->update($input);
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
 
         $this->setEnv('MOLLIE_KEY',$data->molly_key,$prev);
         // Set Molly ENV
-        Artisan::call('cache:clear');
-        Artisan::call('config:clear');
-        Artisan::call('route:clear');
-        Artisan::call('view:clear');
+        // Artisan::call('cache:clear');
+        // Artisan::call('config:clear');
+        // Artisan::call('route:clear');
+        // Artisan::call('view:clear');
         //--- Logic Section Ends
 
         //--- Redirect Section
@@ -252,14 +252,14 @@ class GeneralSettingController extends Controller
     {
         return view('admin.generalsetting.maintain');
     }
-    
+
     public function ispopup($status)
     {
 
         $data = Generalsetting::findOrFail(1);
         $data->is_popup = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
 
@@ -269,7 +269,7 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->multiple_shipping = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
 
@@ -279,7 +279,7 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->multiple_packaging = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
 
@@ -289,7 +289,7 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->paypal_check = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
 
@@ -299,7 +299,7 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->is_instamojo = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
 
@@ -309,7 +309,7 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->is_paystack = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
 
@@ -318,7 +318,7 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->is_paytm = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
 
@@ -328,7 +328,7 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->is_molly = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
     public function razor($status)
@@ -336,7 +336,7 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->is_razorpay = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
 
@@ -347,7 +347,7 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->stripe_check = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
     public function guest($status)
@@ -355,7 +355,7 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->guest_checkout = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
     public function isemailverify($status)
@@ -363,7 +363,7 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->is_verification_email = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
 
@@ -373,7 +373,7 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->cod_check = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
     public function comment($status)
@@ -381,14 +381,14 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->is_comment = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
     public function isaffilate($status)
     {
         $data = Generalsetting::findOrFail(1);
         $data->is_affilate = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
     public function issmtp($status)
@@ -396,7 +396,7 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->is_smtp = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
     public function talkto($status)
@@ -404,7 +404,7 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->is_talkto = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
     public function issubscribe($status)
@@ -412,7 +412,7 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->is_subscribe = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
     public function isloader($status)
@@ -420,7 +420,7 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->is_loader = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
     public function stock($status)
@@ -428,7 +428,7 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->show_stock = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
     public function ishome($status)
@@ -436,7 +436,7 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->is_home = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
     public function isadminloader($status)
@@ -444,7 +444,7 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->is_admin_loader = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
     public function isdisqus($status)
@@ -452,7 +452,7 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->is_disqus = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
     public function iscontact($status)
@@ -460,35 +460,35 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->is_contact = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
     public function isfaq($status)
     {
         $data = Generalsetting::findOrFail(1);
         $data->is_faq = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
     public function language($status)
     {
         $data = Generalsetting::findOrFail(1);
         $data->is_language = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
     public function currency($status)
     {
         $data = Generalsetting::findOrFail(1);
         $data->is_currency = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
     public function regvendor($status)
     {
         $data = Generalsetting::findOrFail(1);
         $data->reg_vendor = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
     public function iscapcha($status)
@@ -496,7 +496,7 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->is_capcha = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
     public function isreport($status)
@@ -504,7 +504,7 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->is_report = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
     public function issecure($status)
@@ -512,7 +512,7 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->is_secure = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
     public function ismaintain($status)
@@ -520,7 +520,7 @@ class GeneralSettingController extends Controller
         $data = Generalsetting::findOrFail(1);
         $data->is_maintain = $status;
         $data->update();
-        cache()->forget('generalsettings');
+        // cache()->forget('generalsettings');
     }
 
 }

@@ -24,8 +24,8 @@ class RegisterController extends Controller
     	{
 	        $value = session('captcha_string');
 	        if ($request->codes != $value){
-	            return response()->json(array('errors' => [ 0 => 'Please enter Correct Capcha Code.' ]));    
-	        }    		
+	            return response()->json(array('errors' => [ 0 => 'Please enter Correct Capcha Code.' ]));
+	        }
     	}
 
 
@@ -33,17 +33,18 @@ class RegisterController extends Controller
 
         $rules = [
 		        'email'   => 'required|email|unique:users',
+		        'phone'   => 'required|unique:users',
 		        'password' => 'required|confirmed'
                 ];
         $validator = Validator::make($request->all(), $rules);
-        
+
         if ($validator->fails()) {
           return response()->json(array('errors' => $validator->getMessageBag()->toArray()));
         }
         //--- Validation Section Ends
 
 	        $user = new User;
-	        $input = $request->all();        
+	        $input = $request->all();
 	        $input['password'] = bcrypt($request['password']);
 	        $token = md5(time().$request->name.$request->email);
 	        $input['verification_link'] = $token;
@@ -68,7 +69,7 @@ class RegisterController extends Controller
 					$input['is_vendor'] = 1;
 
 			  }
-			  
+
 			$user->fill($input)->save();
 	        if($gs->is_verification_email == 1)
 	        {
@@ -101,7 +102,7 @@ class RegisterController extends Controller
 	        $notification = new Notification;
 	        $notification->user_id = $user->id;
 	        $notification->save();
-            Auth::guard('web')->login($user); 
+            Auth::guard('web')->login($user);
           	return response()->json(1);
 	        }
 
@@ -112,7 +113,7 @@ class RegisterController extends Controller
         $gs = Generalsetting::findOrFail(1);
 
         if($gs->is_verification_email == 1)
-	        {    	
+	        {
         $user = User::where('verification_link','=',$token)->first();
         if(isset($user))
         {
@@ -121,12 +122,12 @@ class RegisterController extends Controller
 	        $notification = new Notification;
 	        $notification->user_id = $user->id;
 	        $notification->save();
-            Auth::guard('web')->login($user); 
+            Auth::guard('web')->login($user);
             return redirect()->route('user-dashboard')->with('success','Email Verified Successfully');
         }
     		}
     		else {
-    		return redirect()->back();	
+    		return redirect()->back();
     		}
     }
 }
