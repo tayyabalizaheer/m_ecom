@@ -1,5 +1,11 @@
 @extends('layouts.front')
-
+@section('styles')
+    <style>
+        .iti{
+            width: 100%
+        }
+    </style>
+@endsection
 @section('content')
 
 <section class="login-signup">
@@ -26,11 +32,11 @@
               </div>
               <div class="login-form signin-form">
                 @include('includes.admin.form-login')
-                <form class="mloginform" action="{{ route('user.login.submit') }}" method="POST">
+                <form id="mloginform" class="mloginform" action="{{ route('user.login.submit') }}" method="POST">
                   {{ csrf_field() }}
                   <div class="form-input">
-                    <input type="email" name="email" placeholder="{{ $langg->lang173 }}" required="">
-                    <i class="icofont-user-alt-5"></i>
+                    <input type="tel" id="login-phone" class="User Name" name="tel-phone" placeholder="{{ $langg->lang184 }}" required="">
+                    <input type="hidden" name="phone" id="login-phone-text">
                   </div>
                   <div class="form-input">
                     <input type="password" class="Password" name="password" placeholder="{{ $langg->lang174 }}"
@@ -50,7 +56,7 @@
                   </div>
                   <input type="hidden" name="modal" value="1">
                   <input class="mauthdata" type="hidden" value="{{ $langg->lang177 }}">
-                  <button type="submit" class="submit-btn">{{ $langg->lang178 }}</button>
+                  <button id="mloginform-button" type="button" class="submit-btn">{{ $langg->lang178 }}</button>
                   @if(App\Models\Socialsetting::find(1)->f_check == 1 || App\Models\Socialsetting::find(1)->g_check ==
                   1)
                   <div class="social-area">
@@ -85,8 +91,10 @@
               </div>
               <div class="login-form signup-form">
                 @include('includes.admin.form-login')
-                <form class="mregisterform" action="{{route('user-register-submit')}}" method="POST">
+
+                <form id="register-form" class="mregisterform" action="{{route('user-register-submit')}}" method="POST">
                   {{ csrf_field() }}
+                <div id="step-1">
 
                   <div class="form-input">
                     <input type="text" class="User Name" name="name" placeholder="{{ $langg->lang182 }}" required="">
@@ -99,8 +107,8 @@
                   </div>
 
                   <div class="form-input">
-                    <input type="text" class="User Name" name="phone" placeholder="{{ $langg->lang184 }}" required="">
-                    <i class="icofont-phone"></i>
+                    <input type="tel" id="sign-phone" class="User Name" name="tel-phone" placeholder="{{ $langg->lang184 }}" required="">
+                    <input type="hidden" name="phone" id="phone">
                   </div>
 
                   <div class="form-input">
@@ -135,9 +143,23 @@
                   </div>
 
                   @endif
+                  <div class="form-input" id="recaptcha-div">
+                    <div id="recaptcha-container"></div>
+                  </div>
+                </div>
 
+                  <div id="verify-div" style="display: none">
+                    <label for="">Enter Verification code</label>
+                    <div class="form-input">
+                        <input type="text" id="verificationCode" class="form-control" placeholder="Enter verification code">
+                        <i class="icofont-verification-check"></i>
+                    </div>
+                    <div class="text-success" id="successRegsiter" style="display: none;"></div>
+                  </div>
                   <input class="mprocessdata" type="hidden" value="{{ $langg->lang188 }}">
-                  <button type="submit" class="submit-btn">{{ $langg->lang189 }}</button>
+
+                  <button id="sendcode" type="button" class="submit-btn">{{ $langg->lang189 }}</button>
+                  <button id="vefiry" type="button" class="submit-btn" style="display: none">Verify</button>
 
                 </form>
               </div>
@@ -151,4 +173,111 @@
   </div>
 </section>
 
+@endsection
+@section('js')
+<script src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js"></script>
+
+<script>
+$(function() {
+    var inputLogin = document.querySelector("#login-phone");
+    var itiLogin = window.intlTelInput(inputLogin,{
+        separateDialCode : true
+    });
+
+    $('#login-phone').on('keyup change',function () {
+        $('#login-phone-text').val(itiLogin.getNumber());
+
+    });
+    $('#mloginform-button').on('click tap',function () {
+        $('#login-phone-text').val(itiLogin.getNumber());
+        $(this).submit();
+    });
+
+
+    var input = document.querySelector("#sign-phone");
+    var iti = window.intlTelInput(input,{
+        separateDialCode : true
+    });
+
+
+  var firebaseConfig = {
+    apiKey: "AIzaSyDm1Dly0HI5INvOReXPRRcbFpfvjxsshkQ",
+    authDomain: "ecom-60221.firebaseapp.com",
+    projectId: "ecom-60221",
+    storageBucket: "ecom-60221.appspot.com",
+    messagingSenderId: "1016236535235",
+    appId: "1:1016236535235:web:2c27a79de2c4c91618a176",
+    measurementId: "G-J97JWGMLQ6"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+
+
+    window.onload=function () {
+      render();
+    };
+
+    function render() {
+        window.recaptchaVerifier=new firebase.auth.RecaptchaVerifier('recaptcha-container');
+        recaptchaVerifier.render();
+    }
+
+    $('#sendcode').on('click tap',function () {
+        $('#phone').val(iti.getNumber());
+
+        phoneSendAuth();
+    });
+
+    $('#sign-phone').on('keyup change',function () {
+        $('#phone').val(iti.getNumber());
+        $('#verify-div').hide();
+        $('#vefiry').hide();
+        $('#sendcode').show();
+        $('#recaptcha-div').show();
+    });
+    $('#vefiry').on('click tap',function () {
+        codeverify();
+    });
+
+    function phoneSendAuth() {
+
+        var number = iti.getNumber();
+        console.log(number);
+        firebase.auth().signInWithPhoneNumber(number,window.recaptchaVerifier).then(function (confirmationResult) {
+
+            window.confirmationResult=confirmationResult;
+            coderesult=confirmationResult;
+            console.log(coderesult);
+
+            $("#sentSuccess").text("Message Sent Successfully.");
+            $("#sentSuccess").show();
+            $('#verify-div').show();
+            $('#vefiry').show();
+            $('#sendcode').hide();
+            $('#recaptcha-div').hide();
+        }).catch(function (error) {
+            swal('Error',error.message,'error')
+        });
+
+    }
+
+    function codeverify() {
+
+        var code = $("#verificationCode").val();
+        console.log(code);
+        coderesult.confirm(code).then(function (result) {
+            var user=result.user;
+            console.log(user);
+            $('#register-form').submit();
+            $("#successRegsiter").text("you are register Successfully.");
+            $("#successRegsiter").show();
+
+        }).catch(function (error) {
+           swal('Error',error.message,'error')
+        });
+    }
+
+});
+
+</script>
 @endsection
