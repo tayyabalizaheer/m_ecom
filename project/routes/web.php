@@ -904,6 +904,9 @@ Route::prefix('user')->group(function() {
   Route::get('/register/verify/{token}', 'User\RegisterController@token')->name('user-register-token');
   // User Register End
 
+
+  Route::post('/register/validate', 'User\RegisterController@register_validate')->name('register.validate');
+
   // User Reset
   Route::get('/reset', 'User\UserController@resetform')->name('user-reset');
   Route::post('/reset', 'User\UserController@reset')->name('user-reset-submit');

@@ -15,6 +15,30 @@ use Validator;
 class RegisterController extends Controller
 {
 
+    public function register_validate(Request $request)
+    {
+        $rules = [
+            'email'   => 'required|email|unique:users',
+            'phone'   => 'required|unique:users',
+            'password' => 'required|confirmed'
+            ];
+        $customs = [];
+        if($request->vendor)
+        {
+            $rules['shop_name'] = 'unique:users';
+            $customs = [
+                'shop_name.unique' => 'This Shop Name has already been taken.'
+            ];
+        }
+
+        $validator = Validator::make($request->all(), $rules, $customs);
+
+        if ($validator->fails()) {
+            return response()->json(array('errors' => $validator->getMessageBag()->toArray()));
+        }
+        return response()->json(1);
+    }
+
     public function register(Request $request)
     {
 
@@ -54,8 +78,7 @@ class RegisterController extends Controller
 	          {
 					//--- Validation Section
 					$rules = [
-						'shop_name' => 'unique:users',
-						'shop_number'  => 'max:10'
+						'shop_name' => 'unique:users'
 							];
 					$customs = [
 						'shop_name.unique' => 'This Shop Name has already been taken.',

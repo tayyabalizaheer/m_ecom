@@ -93,7 +93,7 @@
                 <form id="register-form" class="mregisterform" action="{{route('user-register-submit')}}" method="POST">
                   {{ csrf_field() }}
                 <div id="step-1">
-
+                    <input id="verrifyobj" type="hidden" name="verrifyobj" value="1">
                   <div class="form-input">
                     <input type="text" class="User Name" name="name" placeholder="{{ $langg->lang182 }}" required="">
                     <i class="icofont-user-alt-5"></i>
@@ -147,7 +147,9 @@
                 </div>
 
                   <div id="verify-div" style="display: none">
-                    <label for="">Enter Verification code</label>
+                    <label for="">Enter Verification code
+                        <a class="btn btn-sm btn-primary text-white resend-otp">Resend</a>
+                    </label>
                     <div class="form-input">
                         <input type="text" id="verificationCode" class="form-control" placeholder="Enter verification code">
                         <i class="icofont-verification-check"></i>
@@ -177,6 +179,7 @@
 
 <script>
 $(function() {
+    window.verificationId = '';
     var inputLogin = document.querySelector("#login-phone");
     var itiLogin = window.intlTelInput(inputLogin,{
         separateDialCode : true
@@ -222,8 +225,10 @@ $(function() {
 
     $('#sendcode').on('click tap',function () {
         $('#phone').val(iti.getNumber());
-
-        phoneSendAuth();
+        console.log(registerValidator());
+        if(registerValidator()){
+            phoneSendAuth();
+        }
     });
 
     $('#sign-phone').on('keyup change',function () {
@@ -236,7 +241,11 @@ $(function() {
     $('#vefiry').on('click tap',function () {
         codeverify();
     });
-
+    $('.resend-otp').on('click tap',function () {
+        var number = iti.getNumber();
+        console.log(number,window.verificationId);
+        firebase.auth().signInWithPhoneNumber(number,window.recaptchaVerifier);
+    });
     function phoneSendAuth() {
 
         var number = iti.getNumber();
@@ -245,6 +254,7 @@ $(function() {
 
             window.confirmationResult=confirmationResult;
             coderesult=confirmationResult;
+            window.verificationId = coderesult.verificationId;
             console.log(coderesult);
 
             $("#sentSuccess").text("Message Sent Successfully.");
@@ -252,7 +262,7 @@ $(function() {
             $('#verify-div').show();
             $('#vefiry').show();
             $('#sendcode').hide();
-            $('#recaptcha-div').hide();
+            // $('#recaptcha-div').hide();
         }).catch(function (error) {
             swal('Error',error.message,'error')
         });

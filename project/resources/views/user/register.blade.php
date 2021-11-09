@@ -207,7 +207,7 @@
                   </div>
                   <div class="col-lg-12" id="verify-div" style="display: none">
                     <label for="">Enter Verification code
-                        <a id="reg-vendor-phone-rebtn" style="text-decoration: underline">Resend</a>
+                        <a class="btn btn-sm btn-primary text-white resend-otp">Resend</a>
                     </label>
                     <div class="form-input">
                         <input type="text" id="verificationCode" class="form-control" placeholder="Enter verification code">
@@ -256,9 +256,11 @@ $(function() {
             $('#recaptcha-div').show();
 
         });
-        $('#reg-vendor-phone-btn,#reg-vendor-phone-rebtn').on('click tap',function () {
+        $('#reg-vendor-phone-btn').on('click tap',function () {
         $('#reg-vendor-phone-text').val(iti.getNumber());
-        phoneSendAuth();
+        if(registerValidator()){
+            phoneSendAuth();
+        }
         });
 
   var firebaseConfig = {
@@ -289,6 +291,10 @@ $(function() {
     $('#verify-vendor-phone-btn').on('click tap',function () {
         codeverify();
     });
+    $('.resend-otp').on('click tap',function () {
+        var number = iti.getNumber();
+        firebase.auth().signInWithPhoneNumber(number,window.recaptchaVerifier);
+    });
 
     function phoneSendAuth() {
 
@@ -305,7 +311,7 @@ $(function() {
             $('#verify-div').show();
             $('#verify-vendor-phone-btn').show();
             $('#reg-vendor-phone-btn').hide();
-            $('#recaptcha-div').hide();
+            // $('#recaptcha-div').hide();
         }).catch(function (error) {
             swal('Error',error.message,'error')
         });
