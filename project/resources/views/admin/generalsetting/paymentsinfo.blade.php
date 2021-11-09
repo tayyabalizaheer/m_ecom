@@ -102,10 +102,10 @@
                         </div>
 
 
-<hr>
+                        <hr>
 
 
-                        <div class="row justify-content-center">
+                        {{-- <div class="row justify-content-center">
                             <div class="col-lg-3">
                               <div class="left-area">
                                 <h4 class="heading">
@@ -147,13 +147,13 @@
                             <textarea class="input-field" name="paypal_text" placeholder="{{ __('Paypal Text') }}">{{ $gs->paypal_text }}</textarea>
 
                           </div>
-                        </div>
+                        </div> --}}
 
 
 
-<hr>
+                        {{-- <hr> --}}
 
-                        <div class="row justify-content-center">
+                        {{-- <div class="row justify-content-center">
                             <div class="col-lg-3">
                               <div class="left-area">
                                 <h4 class="heading">
@@ -226,10 +226,10 @@
                           </div>
 
 
-<hr>
+                        <hr> --}}
 
 
-                        <div class="row justify-content-center">
+                        {{-- <div class="row justify-content-center">
                             <div class="col-lg-3">
                               <div class="left-area">
                                 <h4 class="heading">
@@ -287,10 +287,10 @@
                         </div>
 
 
-                        <hr>
+                        <hr> --}}
 
 
-                        <div class="row justify-content-center">
+                        {{-- <div class="row justify-content-center">
                             <div class="col-lg-3">
                               <div class="left-area">
                                 <h4 class="heading">
@@ -384,9 +384,9 @@
                             </label>
                           </div>
                           </div>
-                        <hr>
+                        <hr> --}}
 
-                        <div class="row justify-content-center">
+                        {{-- <div class="row justify-content-center">
                             <div class="col-lg-3">
                               <div class="left-area">
                                 <h4 class="heading">
@@ -431,9 +431,9 @@
                           </div>
                         </div>
 
-<hr>
+<hr> --}}
 
-
+{{--
                         <div class="row justify-content-center">
                             <div class="col-lg-3">
                               <div class="left-area">
@@ -498,10 +498,10 @@
                         </div>
 
 
-<hr>
+<hr> --}}
 
 
-                        <div class="row justify-content-center">
+                        {{-- <div class="row justify-content-center">
                             <div class="col-lg-3">
                               <div class="left-area">
                                 <h4 class="heading">
@@ -517,7 +517,7 @@
                                     </select>
                                   </div>
                             </div>
-                          </div>
+                          </div> --}}
 
                         <div class="row justify-content-center">
                             <div class="col-lg-3">
@@ -549,7 +549,7 @@
 
                           </div>
                         </div>
-<hr>
+{{-- <hr> --}}
 
                         <div class="row justify-content-center">
                           <div class="col-lg-3">
@@ -607,7 +607,7 @@
 
                       <hr>
 
-                        <div class="row justify-content-center">
+                        {{-- <div class="row justify-content-center">
                           <div class="col-lg-3">
                             <div class="left-area">
                                 <h4 class="heading">{{ __('Fixed Commission') }} *
@@ -634,6 +634,48 @@
                           <div class="col-lg-6">
                             <input type="text" class="input-field" placeholder="{{ __('Percentage Commission') }}" name="percentage_commission" value="{{ $gs->percentage_commission }}" required="">
                           </div>
+                        </div>
+--}}
+
+
+                        <div class="row justify-content-center">
+                            <div class="col-lg-3">
+                            <div class="left-area">
+                                <h4 class="heading">{{ __('Product listing credit') }} *
+                                    </h4>
+                                    <p class="sub-heading">{{ __('Credits required to add product') }}</p>
+                            </div>
+                            </div>
+                            <div class="col-lg-6">
+                            <input type="text" class="input-field" placeholder="{{ __('Product listing credit') }}" name="product_listing_credit" value="{{ $gs->product_listing_credit }}" required="">
+                            </div>
+                        </div>
+
+
+                        <div class="row justify-content-center">
+                            <div class="col-lg-3">
+                            <div class="left-area">
+                                <h4 class="heading">{{ __('Order View credit') }} *
+                                    </h4>
+                                    <p class="sub-heading">{{ __('Credits required to view order ') }}</p>
+                            </div>
+                            </div>
+                            <div class="col-lg-6">
+                            <input type="text" class="input-field" placeholder="{{ __('Order View credit') }}" name="order_view_credit" value="{{ $gs->order_view_credit }}" required="">
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <div class="col-lg-3">
+                            <div class="left-area">
+                                <h4 class="heading">{{ __('Query Requests credit') }} *
+                                    </h4>
+                                    <p class="sub-heading">{{ __('Credits required to view requirement listing query') }}</p>
+                            </div>
+                            </div>
+                            <div class="col-lg-6">
+                            <input type="text" class="input-field" placeholder="{{ __('Query Requests') }}" name="request_view_credit" value="{{ $gs->request_view_credit }}" required="">
+                            </div>
                         </div>
 
 

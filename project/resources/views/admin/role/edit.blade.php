@@ -28,7 +28,7 @@
                           <div class="gocover" style="background: url({{asset('assets/images/'.$gs->admin_loader)}}) no-repeat scroll center center rgba(45, 45, 45, 0.5);"></div>
                       <form id="geniusform" action="{{route('admin-role-update',$data->id)}}" method="POST" enctype="multipart/form-data">
                           {{csrf_field()}}
-                          @include('includes.admin.form-both') 
+                          @include('includes.admin.form-both')
 
                         <div class="row">
                           <div class="col-lg-4">
@@ -68,20 +68,28 @@
 
                         <div class="row justify-content-center">
                             <div class="col-lg-4 d-flex justify-content-between">
+                                <label class="control-label">{{ __('Customers') }} *</label>
+                                <label class="switch">
+                                  <input type="checkbox" name="section[]" value="customers" {{ $data->sectionCheck('customers') ? 'checked' : '' }}>
+                                  <span class="slider round"></span>
+                                </label>
+                              </div>
+                            <div class="col-lg-2"></div>
+
+                            {{-- <div class="col-lg-4 d-flex justify-content-between">
                               <label class="control-label">{{ __('Affiliate Products') }} *</label>
                               <label class="switch">
                                 <input type="checkbox" name="section[]" value="affilate_products" {{ $data->sectionCheck('affilate_products') ? 'checked' : '' }}>
                                 <span class="slider round"></span>
                               </label>
-                            </div>
-                            <div class="col-lg-2"></div>
+                            </div> --}}
                             <div class="col-lg-4 d-flex justify-content-between">
-                              <label class="control-label">{{ __('Customers') }} *</label>
-                              <label class="switch">
-                                <input type="checkbox" name="section[]" value="customers" {{ $data->sectionCheck('customers') ? 'checked' : '' }}>
-                                <span class="slider round"></span>
-                              </label>
-                            </div>
+                                <label class="control-label">{{ __('Messages') }} *</label>
+                                <label class="switch">
+                                  <input type="checkbox" name="section[]" value="messages" {{ $data->sectionCheck('messages') ? 'checked' : '' }}>
+                                  <span class="slider round"></span>
+                                </label>
+                              </div>
                         </div>
 
                         <div class="row justify-content-center">
@@ -93,13 +101,20 @@
                               </label>
                             </div>
                             <div class="col-lg-2"></div>
-                            <div class="col-lg-4 d-flex justify-content-between">
+                            {{-- <div class="col-lg-4 d-flex justify-content-between">
                               <label class="control-label">{{ __('Vendor Subscription Plans') }} *</label>
                               <label class="switch">
                                 <input type="checkbox" name="section[]" value="vendor_subscription_plans" {{ $data->sectionCheck('vendor_subscription_plans') ? 'checked' : '' }}>
                                 <span class="slider round"></span>
                               </label>
-                            </div>
+                            </div> --}}
+                            <div class="col-lg-4 d-flex justify-content-between">
+                                <label class="control-label">{{ __('Subscribers') }} *</label>
+                                <label class="switch">
+                                  <input type="checkbox" name="section[]" value="subscribers" {{ $data->sectionCheck('subscribers') ? 'checked' : '' }}>
+                                  <span class="slider round"></span>
+                                </label>
+                              </div>
                         </div>
 
                         <div class="row justify-content-center">
@@ -111,13 +126,20 @@
                               </label>
                             </div>
                             <div class="col-lg-2"></div>
-                            <div class="col-lg-4 d-flex justify-content-between">
+                            {{-- <div class="col-lg-4 d-flex justify-content-between">
                               <label class="control-label">{{ __('Bulk Product Upload') }} *</label>
                               <label class="switch">
                                 <input type="checkbox" name="section[]" value="bulk_product_upload" {{ $data->sectionCheck('bulk_product_upload') ? 'checked' : '' }}>
                                 <span class="slider round"></span>
                               </label>
-                            </div>
+                            </div> --}}
+                            <div class="col-lg-4 d-flex justify-content-between">
+                                <label class="control-label">{{ __('SEO Tools') }} *</label>
+                                <label class="switch">
+                                  <input type="checkbox" name="section[]" value="seo_tools" {{ $data->sectionCheck('seo_tools') ? 'checked' : '' }}>
+                                  <span class="slider round"></span>
+                                </label>
+                              </div>
                         </div>
 
                         <div class="row justify-content-center">
@@ -140,20 +162,14 @@
 
                         <div class="row justify-content-center">
                             <div class="col-lg-4 d-flex justify-content-between">
-                              <label class="control-label">{{ __('Blog') }} *</label>
+                              {{-- <label class="control-label">{{ __('Blog') }} *</label>
                               <label class="switch">
                                 <input type="checkbox" name="section[]" value="blog" {{ $data->sectionCheck('blog') ? 'checked' : '' }}>
                                 <span class="slider round"></span>
-                              </label>
+                              </label> --}}
                             </div>
                             <div class="col-lg-2"></div>
-                            <div class="col-lg-4 d-flex justify-content-between">
-                              <label class="control-label">{{ __('Messages') }} *</label>
-                              <label class="switch">
-                                <input type="checkbox" name="section[]" value="messages" {{ $data->sectionCheck('messages') ? 'checked' : '' }}>
-                                <span class="slider round"></span>
-                              </label>
-                            </div>
+
                         </div>
 
                         <div class="row justify-content-center">
@@ -212,21 +228,15 @@
                         </div>
 
                         <div class="row justify-content-center">
-                            <div class="col-lg-4 d-flex justify-content-between">
+                            {{-- <div class="col-lg-4 d-flex justify-content-between">
                               <label class="control-label">{{ __('Language Settings') }} *</label>
                               <label class="switch">
                                 <input type="checkbox" name="section[]" value="language_settings" {{ $data->sectionCheck('language_settings') ? 'checked' : '' }}>
                                 <span class="slider round"></span>
                               </label>
                             </div>
-                            <div class="col-lg-2"></div>
-                            <div class="col-lg-4 d-flex justify-content-between">
-                              <label class="control-label">{{ __('SEO Tools') }} *</label>
-                              <label class="switch">
-                                <input type="checkbox" name="section[]" value="seo_tools" {{ $data->sectionCheck('seo_tools') ? 'checked' : '' }}>
-                                <span class="slider round"></span>
-                              </label>
-                            </div>
+                            <div class="col-lg-2"></div> --}}
+
                         </div>
 
                         <div class="row justify-content-center">
@@ -239,18 +249,13 @@
                             </div>
                             <div class="col-lg-2"></div>
                             <div class="col-lg-4 d-flex justify-content-between">
-                              <label class="control-label">{{ __('Subscribers') }} *</label>
-                              <label class="switch">
-                                <input type="checkbox" name="section[]" value="subscribers" {{ $data->sectionCheck('subscribers') ? 'checked' : '' }}>
-                                <span class="slider round"></span>
-                              </label>
                             </div>
                         </div>
 
                         <div class="row">
                           <div class="col-lg-5">
                             <div class="left-area">
-                              
+
                             </div>
                           </div>
                           <div class="col-lg-7">

@@ -15,6 +15,20 @@ Route::prefix('admin')->group(function() {
 
   //------------ ADMIN LOGIN SECTION ENDS ------------
 
+
+  //------------ ADMIN City SECTION ENDS ------------
+
+  Route::get('city', 'Admin\CityController@index')->name('admin.city.index');
+  Route::get('city/create', 'Admin\CityController@create')->name('admin.city.create');
+  Route::post('city/store', 'Admin\CityController@store')->name('admin.city.store');
+  Route::get('city/edit/{id}', 'Admin\CityController@edit')->name('admin.city.edit');
+  Route::post('city/update/{id}', 'Admin\CityController@update')->name('admin.city.update');
+  Route::get('city/delete/{id}', 'Admin\CityController@delete')->name('admin.city.delete');
+  //------------ ADMIN City SECTION ENDS ------------
+
+
+
+
   //------------ ADMIN NOTIFICATION SECTION ------------
 
   // Notification Count

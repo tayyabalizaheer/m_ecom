@@ -53,7 +53,7 @@
 
 @if(Auth::guard('admin')->user()->sectionCheck('affilate_products'))
 
-    <li>
+    {{-- <li>
         <a href="#affiliateprod" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false">
             <i class="icofont-cart"></i>{{ __('Affiliate Products') }}
         </a>
@@ -65,7 +65,7 @@
                 <a href="{{ route('admin-import-index') }}"><span>{{ __('All Affiliate Products') }}</span></a>
             </li>
         </ul>
-    </li>
+    </li> --}}
 
 @endif
 
@@ -167,9 +167,9 @@
 
 @if(Auth::guard('admin')->user()->sectionCheck('bulk_product_upload'))
 
-    <li>
+    {{-- <li>
         <a href="{{ route('admin-prod-import') }}"><i class="fas fa-upload"></i>{{ __('Bulk Product Upload') }}</a>
-    </li>
+    </li> --}}
 
 @endif
 
@@ -204,7 +204,7 @@
 
 @if(Auth::guard('admin')->user()->sectionCheck('blog'))
 
-    <li>
+    {{-- <li>
         <a href="#blog" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false">
             <i class="fas fa-fw fa-newspaper"></i>{{ __('Blog') }}
         </a>
@@ -216,7 +216,7 @@
                 <a href="{{ route('admin-blog-index') }}"><span>{{ __('Posts') }}</span></a>
             </li>
         </ul>
-    </li>
+    </li> --}}
 
 @endif
 

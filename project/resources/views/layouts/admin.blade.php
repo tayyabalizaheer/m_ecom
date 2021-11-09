@@ -43,11 +43,13 @@
 		<link href="{{asset('assets/admin/css/common.css')}}" rel="stylesheet" />
 
 		@endif
-
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 		@yield('styles')
 
 	</head>
 	<body>
+        @include('flash')
+
 		<div class="page">
 			<div class="page-main">
 				<!-- Header Menu Area Start -->
@@ -216,7 +218,51 @@
 
 
 		@yield('scripts')
+        <script>
+            function confirmDelete(formid){
+            swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                $( "#"+formid ).submit();
+            }
+            });
+        }
+        function confirmForm(formid,text){
+            swal({
+            title: "Are you sure?",
+            text: text,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                $( "#"+formid ).submit();
+            }
+            });
+        }
 
+        function confirmLink(link,text){
+            swal({
+            title: "Are you sure?",
+            text: text,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                location.href = link;
+            }
+            });
+        }
+        </script>
 @if($gs->is_admin_loader == 0)
 <style>
 	div#geniustable_processing {

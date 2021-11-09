@@ -39,7 +39,7 @@
         </ul>
     </li>
 
-    <li>
+    {{-- <li>
         <a href="#affiliateprod" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false">
             <i class="icofont-cart"></i>{{ __('Affiliate Products') }}
         </a>
@@ -51,7 +51,7 @@
                 <a href="{{ route('admin-import-index') }}"><span>{{ __('All Affiliate Products') }}</span></a>
             </li>
         </ul>
-    </li>
+    </li> --}}
 
     <li>
         <a href="#menu3" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false">
@@ -111,6 +111,10 @@
     </li>
 
     <li>
+        <a href="{{ route('admin.city.index') }}" class=" wave-effect"><i class="fas fa-city"></i>Cities</a>
+    </li>
+
+    <li>
         <a href="#menu5" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false"><i class="fas fa-sitemap"></i>{{ __('Manage Categories') }}</a>
         <ul class="collapse list-unstyled
         @if(request()->is('admin/attribute/*/manage') && request()->input('type')=='category')
@@ -132,9 +136,9 @@
         </ul>
     </li>
 
-    <li>
+    {{-- <li>
         <a href="{{ route('admin-prod-import') }}"><i class="fas fa-upload"></i>{{ __('Bulk Product Upload') }}</a>
-    </li>
+    </li> --}}
 
     <li>
         <a href="#menu4" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false">
@@ -156,7 +160,7 @@
     <li>
         <a href="{{ route('admin-coupon-index') }}" class=" wave-effect"><i class="fas fa-percentage"></i>{{ __('Set Coupons') }}</a>
     </li>
-    <li>
+    {{-- <li>
         <a href="#blog" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false">
             <i class="fas fa-fw fa-newspaper"></i>{{ __('Blog') }}
         </a>
@@ -168,7 +172,7 @@
                 <a href="{{ route('admin-blog-index') }}"><span>{{ __('Posts') }}</span></a>
             </li>
         </ul>
-    </li>
+    </li> --}}
 
     <li>
         <a href="#msg" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false">
@@ -363,7 +367,7 @@
         <li>
             <a href="{{ route('admin-cache-clear') }}" class=" wave-effect"><i class="fas fa-sync"></i>{{ __('Clear Cache') }}</a>
         </li>
-        <li>
+        {{-- <li>
             <a href="#sactive" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false">
                 <i class="fas fa-cog"></i>{{ __('System Activation') }}
             </a>
@@ -372,4 +376,4 @@
                 <li><a href="{{route('admin-activation-form')}}"> {{ __('Activation') }}</a></li>
                 <li><a href="{{route('admin-generate-backup')}}"> {{ __('Generate Backup') }}</a></li>
             </ul>
-        </li>
+        </li> --}}

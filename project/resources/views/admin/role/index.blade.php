@@ -1,6 +1,6 @@
-@extends('layouts.admin') 
+@extends('layouts.admin')
 
-@section('content')  
+@section('content')
           <input type="hidden" id="headerdata" value="{{ __('ROLE') }}">
           <div class="content-area">
             <div class="mr-breadcrumb">
@@ -23,7 +23,7 @@
                 <div class="col-lg-12">
                   <div class="mr-table allproduct">
 
-                        @include('includes.admin.form-success')  
+                        @include('includes.admin.form-success')
 
                     <div class="table-responsiv">
                         <table id="geniustable" class="table table-hover dt-responsive" cellspacing="0" width="100%">
@@ -73,7 +73,7 @@
 
 {{-- DELETE MODAL ENDS --}}
 
-@endsection    
+@endsection
 
 @section('scripts')
 
@@ -98,16 +98,16 @@
                 }
             });
 
-        $(function() {
-        $(".btn-area").append('<div class="col-sm-4 table-contents">'+
-          '<a class="add-btn" href="{{route('admin-role-create')}}">'+
-          '<i class="fas fa-plus"></i> {{ __("Add New Role") }}'+
-          '</a>'+
-          '</div>');
-      });                     
-                  
+    //     $(function() {
+    //     $(".btn-area").append('<div class="col-sm-4 table-contents">'+
+    //       '<a class="add-btn" href="{{route('admin-role-create')}}">'+
+    //       '<i class="fas fa-plus"></i> {{ __("Add New Role") }}'+
+    //       '</a>'+
+    //       '</div>');
+    //   });
+
 {{-- DATA TABLE ENDS--}}
 
 </script>
 
-@endsection   
+@endsection

@@ -411,7 +411,7 @@
 	<footer class="footer" id="footer">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6 col-lg-4">
+				<div class="col-md-6 col-lg-6">
 					<div class="footer-info-area">
 						<div class="footer-logo">
 							<a href="{{ route('front.index') }}" class="logo-link">
@@ -470,7 +470,7 @@
 						</ul>
 					</div>
 				</div>
-				<div class="col-md-6 col-lg-4">
+				<div class="col-md-6 col-lg-6">
 					<div class="footer-widget info-link-widget">
 						<h4 class="title">
 								{{ $langg->lang21 }}
@@ -498,7 +498,7 @@
 						</ul>
 					</div>
 				</div>
-				<div class="col-md-6 col-lg-4">
+				{{-- <div class="col-md-6 col-lg-4">
 					<div class="footer-widget recent-post-widget">
 						<h4 class="title">
 							{{ $langg->lang24 }}
@@ -525,7 +525,7 @@
 							@endforeach
 						</ul>
 					</div>
-				</div>
+				</div> --}}
 			</div>
 		</div>
 
