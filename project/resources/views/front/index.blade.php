@@ -53,7 +53,7 @@
 		<!-- Hero Area End -->
 	@endif
 
-	
+
 	@if($ps->featured_category == 1)
 
 	{{-- Slider buttom Category Start --}}

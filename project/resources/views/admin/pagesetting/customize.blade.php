@@ -26,7 +26,7 @@
     <div class="body-area">
     <div class="row">
       <div class="col-lg-12">
-     
+
 
             <div class="gocover"
               style="background: url({{asset('assets/images/'.$gs->admin_loader)}}) no-repeat scroll center center rgba(45, 45, 45, 0.5);">
@@ -122,7 +122,7 @@
                     <input type="checkbox" name="bottom_small" value="1" {{$data->bottom_small == 1 ? "checked":""}}>
                     <span class="slider round"></span>
                   </label>
-                </div> 
+                </div>
 
                 <div class="col-lg-2"></div>
                 <div class="col-lg-4 d-flex justify-content-between">
@@ -139,34 +139,34 @@
               <div class="row justify-content-center">
 
 
-                <div class="col-lg-4 d-flex justify-content-between">
+                {{-- <div class="col-lg-4 d-flex justify-content-between">
                   <label class="control-label" for="hot_sale">{{ __('Hot, New, Trending & Sale') }} *</label>
                   <label class="switch">
                     <input type="checkbox" name="hot_sale" value="1" {{$data->hot_sale==1?"checked":""}}>
                     <span class="slider round"></span>
                   </label>
-                </div>
-                <div class="col-lg-2"></div>
+                </div> --}}
+                {{-- <div class="col-lg-2"></div>
                 <div class="col-lg-4 d-flex justify-content-between">
                   <label class="control-label" for="review_blog">{{ __('Review & Blog') }} *</label>
                   <label class="switch">
                     <input type="checkbox" name="review_blog" value="1" {{$data->review_blog==1?"checked":""}}>
                     <span class="slider round"></span>
                   </label>
-                </div>
+                </div> --}}
 
               </div>
 
               <div class="row justify-content-center">
 
-                <div class="col-lg-4 d-flex justify-content-between">
+                {{-- <div class="col-lg-4 d-flex justify-content-between">
                   <label class="control-label" for="partners">{{ __('Partners') }} *</label>
                   <label class="switch">
                     <input type="checkbox" name="partners" value="1" {{$data->partners==1?"checked":""}}>
                     <span class="slider round"></span>
                   </label>
-                </div>
-                <div class="col-lg-2"></div>
+                </div> --}}
+                {{-- <div class="col-lg-2"></div> --}}
                 <div class="col-lg-4 d-flex justify-content-between">
                     <label class="control-label" for="service">{{ __('Service') }} *</label>
                     <label class="switch">

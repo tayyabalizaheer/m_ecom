@@ -403,9 +403,9 @@
 			<div class="container">
 
 					@foreach($services->chunk(4) as $chunk)
-	
+
 						<div class="row">
-	
+
 							<div class="col-lg-12 p-0">
 								<div class="info-big-box">
 									<div class="row">
@@ -429,16 +429,16 @@
 									</div>
 								</div>
 							</div>
-	
+
 						</div>
-	
+
 					@endforeach
-	
+
 			</div>
 		</section>
 		{{-- Info Area End  --}}
 
-		@endif		
+		@endif
 
 	<!-- main -->
 	<script src="{{asset('assets/front/js/mainextra.js')}}"></script>
