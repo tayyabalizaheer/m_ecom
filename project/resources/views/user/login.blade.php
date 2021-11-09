@@ -1,9 +1,7 @@
 @extends('layouts.front')
 @section('styles')
     <style>
-        .iti{
-            width: 100%
-        }
+
     </style>
 @endsection
 @section('content')

@@ -21,7 +21,11 @@ class LoginController extends Controller
       $this->code_image();
       return view('user.login');
     }
-
+    public function showregisterForm(Type $var = null)
+    {
+        $this->code_image();
+        return view('user.register');
+    }
     public function login(Request $request)
     {
         //--- Validation Section

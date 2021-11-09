@@ -893,6 +893,8 @@ Route::prefix('user')->group(function() {
 
   // User Login
   Route::get('/login', 'User\LoginController@showLoginForm')->name('user.login');
+  Route::get('vendor/login', 'User\LoginController@showregisterForm')->name('vendor.register');
+
   Route::post('/login', 'User\LoginController@login')->name('user.login.submit');
   // User Login End
 

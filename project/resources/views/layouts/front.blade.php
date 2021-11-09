@@ -56,6 +56,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/js/intlTelInput.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.6/js/utils.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <style>
+        .iti{
+            width: 100%
+        }
+    </style>
 </head>
 
 <body>
@@ -190,7 +196,8 @@
 										</li>
                         				@else
 										<li>
-											<a href="javascript:;" data-toggle="modal" data-target="#vendor-login" class="sell-btn">{{ $langg->lang220 }}</a>
+											{{-- <a href="javascript:;" data-toggle="modal" data-target="#vendor-login" class="sell-btn">{{ $langg->lang220 }}</a> --}}
+											<a href="{{ route('vendor.register') }}" class="sell-btn">{{ $langg->lang220 }}</a>
 										</li>
 										@endif
 									@endif
@@ -557,13 +564,9 @@
 				<div class="modal-body">
 					<nav class="comment-log-reg-tabmenu">
 						<div class="nav nav-tabs" id="nav-tab" role="tablist">
-							<a class="nav-item nav-link login active" id="nav-log-tab1" data-toggle="tab" href="#nav-log1"
+							<a class="nav-item nav-link login active w-100" id="nav-log-tab1" data-toggle="tab" href="#nav-log1"
 								role="tab" aria-controls="nav-log" aria-selected="true">
 								{{ $langg->lang197 }}
-							</a>
-							<a class="nav-item nav-link" id="nav-reg-tab1" data-toggle="tab" href="#nav-reg1" role="tab"
-								aria-controls="nav-reg" aria-selected="false">
-								{{ $langg->lang198 }}
 							</a>
 						</div>
 					</nav>
@@ -576,12 +579,12 @@
 								</div>
 								<div class="login-form signin-form">
 									@include('includes.admin.form-login')
-									<form class="mloginform" action="{{ route('user.login.submit') }}" method="POST">
+									<form id="modal-phone-form" class="mloginform" action="{{ route('user.login.submit') }}" method="POST">
 										{{ csrf_field() }}
 										<div class="form-input">
-											<input type="email" name="email" placeholder="{{ $langg->lang173 }}"
+											<input id="modal-phone" type="tel" name="tel-phone" placeholder="{{ $langg->lang173 }}"
 												required="">
-											<i class="icofont-user-alt-5"></i>
+                                            <input id="modal-phone-text" type="hidden" name="phone">
 										</div>
 										<div class="form-input">
 											<input type="password" class="Password" name="password"
@@ -602,7 +605,7 @@
 										</div>
 										<input type="hidden" name="modal" value="1">
 										<input class="mauthdata" type="hidden" value="{{ $langg->lang177 }}">
-										<button type="submit" class="submit-btn">{{ $langg->lang178 }}</button>
+										<button id="modal-loginform-button" type="button" class="submit-btn">{{ $langg->lang178 }}</button>
 										@if($socialsetting->f_check == 1 ||
 										$socialsetting->g_check == 1)
 										<div class="social-area">
@@ -626,80 +629,6 @@
 											</ul>
 										</div>
 										@endif
-									</form>
-								</div>
-							</div>
-						</div>
-						<div class="tab-pane fade" id="nav-reg1" role="tabpanel" aria-labelledby="nav-reg-tab1">
-							<div class="login-area signup-area">
-								<div class="header-area">
-									<h4 class="title">{{ $langg->lang181 }}</h4>
-								</div>
-								<div class="login-form signup-form">
-									@include('includes.admin.form-login')
-									<form class="mregisterform" action="{{route('user-register-submit')}}"
-										method="POST">
-										{{ csrf_field() }}
-
-										<div class="form-input">
-											<input type="text" class="User Name" name="name"
-												placeholder="{{ $langg->lang182 }}" required="">
-											<i class="icofont-user-alt-5"></i>
-										</div>
-
-										<div class="form-input">
-											<input type="email" class="User Name" name="email"
-												placeholder="{{ $langg->lang183 }}" required="">
-											<i class="icofont-email"></i>
-										</div>
-
-										<div class="form-input">
-											<input type="text" class="User Name" name="phone"
-												placeholder="{{ $langg->lang184 }}" required="">
-											<i class="icofont-phone"></i>
-										</div>
-
-										<div class="form-input">
-											<input type="text" class="User Name" name="address"
-												placeholder="{{ $langg->lang185 }}" required="">
-											<i class="icofont-location-pin"></i>
-										</div>
-
-										<div class="form-input">
-											<input type="password" class="Password" name="password"
-												placeholder="{{ $langg->lang186 }}" required="">
-											<i class="icofont-ui-password"></i>
-										</div>
-
-										<div class="form-input">
-											<input type="password" class="Password" name="password_confirmation"
-												placeholder="{{ $langg->lang187 }}" required="">
-											<i class="icofont-ui-password"></i>
-										</div>
-
-
-										@if($gs->is_capcha == 1)
-
-										<ul class="captcha-area">
-											<li>
-												<p><img class="codeimg1"
-														src="{{asset("assets/images/capcha_code.png")}}" alt=""> <i
-														class="fas fa-sync-alt pointer refresh_code "></i></p>
-											</li>
-										</ul>
-
-										<div class="form-input">
-											<input type="text" class="Password" name="codes"
-												placeholder="{{ $langg->lang51 }}" required="">
-											<i class="icofont-refresh"></i>
-										</div>
-
-
-										@endif
-
-										<input class="mprocessdata" type="hidden" value="{{ $langg->lang188 }}">
-										<button type="submit" class="submit-btn">{{ $langg->lang189 }}</button>
-
 									</form>
 								</div>
 							</div>
@@ -732,10 +661,8 @@
 							@include('includes.admin.form-login')
 							<form id="mforgotform" action="{{route('user-forgot-submit')}}" method="POST">
 								{{ csrf_field() }}
-								<div class="form-input">
-									<input type="email" name="email" class="User Name"
-										placeholder="{{ $langg->lang193 }}" required="">
-									<i class="icofont-user-alt-5"></i>
+								<div class="form-input w-100">
+									<input type="email" name="email">
 								</div>
 								<div class="to-login-page">
 									<a href="javascript:;" id="show-login">
@@ -780,11 +707,12 @@
 				        <div class="login-area">
 				          <div class="login-form signin-form">
 				                @include('includes.admin.form-login')
-				            <form class="mloginform" action="{{ route('user.login.submit') }}" method="POST">
+				            <form id="vendor-phone-form" class="mloginform" action="{{ route('user.login.submit') }}" method="POST">
 				              {{ csrf_field() }}
-				              <div class="form-input">
-				                <input type="email" name="email" placeholder="{{ $langg->lang173 }}" required="">
-				                <i class="icofont-user-alt-5"></i>
+				              <div class="form-input w-100">
+				                <input id="vendor-phone" type="tel" name="tel-phone" placeholder="{{ $langg->lang173 }}"
+												required="">
+                                    <input id="vendor-phone-text" type="hidden" name="phone">
 				              </div>
 				              <div class="form-input">
 				                <input type="password" class="Password" name="password" placeholder="{{ $langg->lang174 }}" required="">
@@ -835,7 +763,7 @@
                 <div class="login-area signup-area">
                     <div class="login-form signup-form">
                        @include('includes.admin.form-login')
-                        <form class="mregisterform" action="{{route('user-register-submit')}}" method="POST">
+                        <form id="reg-vendor-phone-form" class="mregisterform" action="{{route('user-register-submit')}}" method="POST">
                           {{ csrf_field() }}
 
                           <div class="row">
@@ -848,29 +776,30 @@
                            </div>
 
                            <div class="col-lg-6">
- <div class="form-input">
-                                <input type="email" class="User Name" name="email" placeholder="{{ $langg->lang183 }}" required="">
-                                <i class="icofont-email"></i>
+                                <div class="form-input">
+                                    <input  type="email" name="email" placeholder="email"
+                                    required="">
                             </div>
 
                            	</div>
                            <div class="col-lg-6">
-    <div class="form-input">
-                                <input type="text" class="User Name" name="phone" placeholder="{{ $langg->lang184 }}" required="">
-                                <i class="icofont-phone"></i>
+                            <div class="form-input">
+                                <input id="reg-vendor-phone" type="tel" name="tel-phone" placeholder="{{ $langg->lang173 }}"
+                                required="">
+                                <input id="reg-vendor-phone-text" type="hidden" name="phone">
                             </div>
 
                            	</div>
                            <div class="col-lg-6">
 
-<div class="form-input">
+                            <div class="form-input">
                                 <input type="text" class="User Name" name="address" placeholder="{{ $langg->lang185 }}" required="">
                                 <i class="icofont-location-pin"></i>
                             </div>
                            	</div>
 
                            <div class="col-lg-6">
- <div class="form-input">
+                            <div class="form-input">
                                 <input type="text" class="User Name" name="shop_name" placeholder="{{ $langg->lang238 }}" required="">
                                 <i class="icofont-cart-alt"></i>
                             </div>
@@ -878,42 +807,42 @@
                            	</div>
                            <div class="col-lg-6">
 
- <div class="form-input">
+                            <div class="form-input">
                                 <input type="text" class="User Name" name="owner_name" placeholder="{{ $langg->lang239 }}" required="">
                                 <i class="icofont-cart"></i>
                             </div>
                            	</div>
                            <div class="col-lg-6">
 
-<div class="form-input">
+                            <div class="form-input">
                                 <input type="text" class="User Name" name="shop_number" placeholder="{{ $langg->lang240 }}" required="">
                                 <i class="icofont-shopping-cart"></i>
                             </div>
                            	</div>
                            <div class="col-lg-6">
 
- <div class="form-input">
+                            <div class="form-input">
                                 <input type="text" class="User Name" name="shop_address" placeholder="{{ $langg->lang241 }}" required="">
                                 <i class="icofont-opencart"></i>
                             </div>
                            	</div>
                            <div class="col-lg-6">
 
-<div class="form-input">
+                            <div class="form-input">
                                 <input type="text" class="User Name" name="reg_number" placeholder="{{ $langg->lang242 }}" required="">
                                 <i class="icofont-ui-cart"></i>
                             </div>
                            	</div>
                            <div class="col-lg-6">
 
- <div class="form-input">
+                            <div class="form-input">
                                 <input type="text" class="User Name" name="shop_message" placeholder="{{ $langg->lang243 }}" required="">
                                 <i class="icofont-envelope"></i>
                             </div>
                            	</div>
 
                            <div class="col-lg-6">
-  <div class="form-input">
+                            <div class="form-input">
                                 <input type="password" class="Password" name="password" placeholder="{{ $langg->lang186 }}" required="">
                                 <i class="icofont-ui-password"></i>
                             </div>
@@ -928,7 +857,7 @@
 
                             @if($gs->is_capcha == 1)
 
-<div class="col-lg-6">
+                            <div class="col-lg-6">
 
 
                             <ul class="captcha-area">
@@ -941,25 +870,34 @@
                             </ul>
 
 
-</div>
+                            </div>
 
-<div class="col-lg-6">
+                           <div class="col-lg-6">
 
- <div class="form-input">
+                            <div class="form-input">
                                 <input type="text" class="Password" name="codes" placeholder="{{ $langg->lang51 }}" required="">
                                 <i class="icofont-refresh"></i>
 
                             </div>
 
 
-
+                            <div class="form-input" id="recaptcha-div2">
+                                <div id="recaptcha-container2"></div>
+                            </div>
                           </div>
-
+                          <div id="verify-div2" style="display: none">
+                            <label for="">Enter Verification code</label>
+                            <div class="form-input">
+                                <input type="text" id="verificationCode2" class="form-control" placeholder="Enter verification code">
+                                <i class="icofont-verification-check"></i>
+                            </div>
+                            <div class="text-success" id="successRegsiter2" style="display: none;"></div>
+                          </div>
                           @endif
 
 				            <input type="hidden" name="vendor"  value="1">
                             <input class="mprocessdata" type="hidden"  value="{{ $langg->lang188 }}">
-                            <button type="submit" class="submit-btn">{{ $langg->lang189 }}</button>
+                            <button id="reg-vendor-phone-btn" type="button" class="submit-btn">{{ $langg->lang189 }}</button>
 
                            	</div>
 
@@ -1074,7 +1012,44 @@
 
 	@yield('scripts')
 	@yield('js')
+    <script>
+        $(function() {
+        var ModalinputLogin = document.querySelector("#modal-phone");
+        var ModalitiLogin = window.intlTelInput(ModalinputLogin,{
+            separateDialCode : true
+        });
 
+        $('#modal-phone').on('keyup change',function () {
+            $('#modal-phone-text').val(ModalitiLogin.getNumber());
+
+        });
+        $('#modal-loginform-button').on('click tap',function () {
+            console.log(ModalitiLogin.getNumber());
+        $('#modal-phone-text').val(ModalitiLogin.getNumber());
+        $('#modal-phone-form').submit();
+        });
+
+
+        var VendorinputLogin = document.querySelector("#vendor-phone");
+        var VendoritiLogin = window.intlTelInput(VendorinputLogin,{
+            separateDialCode : true
+        });
+
+        $('#vendor-phone').on('keyup change',function () {
+            $('#vendor-phone-text').val(VendoritiLogin.getNumber());
+
+        });
+        $('#vendor-loginform-button').on('click tap',function () {
+        $('#vendor-phone-text').val(VendoritiLogin.getNumber());
+        $('#vendor-phone-form').submit();
+        });
+
+
+
+
+
+    });
+    </script>
 </body>
 
 </html>
