@@ -868,6 +868,8 @@ Route::group(['middleware'=>'permissions:super'],function(){
     Artisan::call('config:clear');
     Artisan::call('route:clear');
     Artisan::call('view:clear');
+    copy(app_path('..\bootstrap\config.php'),app_path("..\bootstrap\cache\config.php"));
+
     return redirect()->route('admin.dashboard')->with('cache','System Cache Has Been Removed.');
   })->name('admin-cache-clear');
 
