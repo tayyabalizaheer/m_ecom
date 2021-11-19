@@ -227,16 +227,20 @@
 				<div class="col-lg-8 col-sm-12 remove-padding order-last order-sm-2 order-md-2">
 					<div class="search-box-wrapper">
 						<div class="search-box">
+
 							<div class="categori-container" id="catSelectForm">
-								<select name="category" id="category_select" class="categoris">
-									<option value="">{{ $langg->lang1 }}</option>
-									@foreach($categories as $data)
-									<option value="{{ $data->slug }}" {{ Request::route('category') == $data->slug ? 'selected' : '' }}>{{ $data->name }}</option>
+                                @php
+                                    $cities = App\City::all();
+                                @endphp
+								<select name="city" id="city_select" class="categoris">
+									<option value="">All Cities</option>
+									@foreach($cities as $city)
+									<option value="{{ $city->slug }}" {{ Request::route('city') == $city->slug ? 'selected' : '' }}>{{ ucfirst($city->name) }}</option>
 									@endforeach
 								</select>
 							</div>
-
 							<form id="searchForm" class="search-form" action="{{ route('front.category', [Request::route('category'),Request::route('subcategory'),Request::route('childcategory')]) }}" method="GET">
+
 								@if (!empty(request()->input('sort')))
 									<input type="hidden" name="sort" value="{{ request()->input('sort') }}">
 								@endif
@@ -246,6 +250,7 @@
 								@if (!empty(request()->input('maxprice')))
 									<input type="hidden" name="maxprice" value="{{ request()->input('maxprice') }}">
 								@endif
+                                <input id="city" type="hidden" name="city" value="{{ request()->input('city') }}">
 								<input type="text" id="prod_name" name="search" placeholder="{{ $langg->lang2 }}" value="{{ request()->input('search') }}" autocomplete="off">
 								<div class="autocomplete">
 								  <div id="myInputautocomplete-list" class="autocomplete-items">
@@ -800,7 +805,9 @@
         $('#modal-phone-form').submit();
         });
 
-
+        $('#city_select').on('change',function(){
+            $('#city').val($(this).val());
+        });
 
 
 

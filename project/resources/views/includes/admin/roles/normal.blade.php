@@ -106,9 +106,9 @@
             <li>
                 <a href="{{ route('admin-vendor-withdraw-index') }}"><span>{{ __('Withdraws') }}</span></a>
             </li>
-            <li>
+            {{-- <li>
                 <a href="{{ route('admin-vendor-subs') }}"><span>{{ __('Vendor Subscriptions') }}</span></a>
-            </li>
+            </li> --}}
             <li>
                 <a href="{{ route('admin-vendor-color') }}"><span>{{ __('Default Background') }}</span></a>
             </li>
@@ -135,9 +135,9 @@
 
 @if(Auth::guard('admin')->user()->sectionCheck('vendor_subscription_plans'))
 
-    <li>
+    {{-- <li>
         <a href="{{ route('admin-subscription-index') }}" class=" wave-effect"><i class="fas fa-dollar-sign"></i>{{ __('Vendor Subscription Plans') }}</a>
-    </li>
+    </li> --}}
 
 @endif
 

@@ -9,6 +9,7 @@ use App\Models\BlogCategory;
 use App\Models\Counter;
 use App\Models\Generalsetting;
 use App\Models\Order;
+use App\City;
 use App\Models\Product;
 use App\Models\Subscriber;
 use App\Models\User;
@@ -147,7 +148,6 @@ class FrontendController extends Controller
             return false;
 
           });
-
 	    return view('front.index',compact('ps','sliders','top_small_banners','feature_products'));
 	}
 

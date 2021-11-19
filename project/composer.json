@@ -21,6 +21,7 @@
         "laravel/tinker": "^2.0",
         "mollie/laravel-mollie": "^2.10",
         "razorpay/razorpay": "^2.5",
+        "spatie/laravel-sluggable": "^2.6",
         "tymon/jwt-auth": "^1.0",
         "yajra/laravel-datatables-oracle": "^9.10",
         "zanysoft/laravel-zip": "^1.0"

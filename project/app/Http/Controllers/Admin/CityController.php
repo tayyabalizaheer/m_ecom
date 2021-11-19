@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\City;
-
+use Str;
 class CityController extends Controller
 {
     //
@@ -62,6 +62,7 @@ class CityController extends Controller
         $City->name = strtolower($request->name);
         $City->latitude = $request->latitude;
         $City->longitude = $request->longitude;
+        $City->slug = Str::slug(strtolower($request->name));
         $City->state = strtolower($request->state);
 
         $City->save();
