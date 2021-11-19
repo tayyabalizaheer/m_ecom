@@ -1,25 +1,25 @@
         <div class="col-lg-4">
           <div class="user-profile-info-area">
             <ul class="links">
-                @php 
+                @php
 
-                  if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') 
+                  if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
                   {
-                    $link = "https"; 
+                    $link = "https";
                   }
                   else
                   {
-                    $link = "http"; 
-                      
-                    // Here append the common URL characters. 
-                    $link .= "://"; 
-                      
-                    // Append the host(domain name, ip) to the URL. 
-                    $link .= $_SERVER['HTTP_HOST']; 
-                      
-                    // Append the requested resource location to the URL 
-                    $link .= $_SERVER['REQUEST_URI']; 
-                  }      
+                    $link = "http";
+
+                    // Here append the common URL characters.
+                    $link .= "://";
+
+                    // Append the host(domain name, ip) to the URL.
+                    $link .= $_SERVER['HTTP_HOST'];
+
+                    // Append the requested resource location to the URL
+                    $link .= $_SERVER['REQUEST_URI'];
+                  }
 
                 @endphp
               <li class="{{ $link == route('user-dashboard') ? 'active':'' }}">
@@ -27,7 +27,7 @@
                   {{ $langg->lang200 }}
                 </a>
               </li>
-              
+
               @if(Auth::user()->IsVendor())
                 <li>
                   <a href="{{ route('vendor-dashboard') }}">
@@ -95,7 +95,7 @@
 
             </ul>
           </div>
-          @if($gs->reg_vendor == 1)
+          {{-- @if($gs->reg_vendor == 1)
             <div class="row mt-4">
               <div class="col-lg-12 text-center">
                 <a href="{{ route('user-package') }}" class="mybtn1 lg">
@@ -103,5 +103,5 @@
                 </a>
               </div>
             </div>
-          @endif
+          @endif --}}
         </div>

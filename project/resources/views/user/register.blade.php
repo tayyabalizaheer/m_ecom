@@ -50,7 +50,7 @@
                       <input type="hidden" name="modal"  value="1">
                        <input type="hidden" name="vendor"  value="1">
                       <input class="mauthdata" type="hidden"  value="{{ $langg->lang177 }}">
-                      <button type="submit" class="submit-btn">{{ $langg->lang178 }}</button>
+                      <button id="vendor-phone-btn" type="button" class="submit-btn">{{ $langg->lang178 }}</button>
                           @if($socialsetting->f_check == 1 || $socialsetting->g_check == 1)
                           <div class="social-area">
                               <h3 class="title">{{ $langg->lang179 }}</h3>
@@ -243,7 +243,19 @@
 
 <script>
 $(function() {
-    var VendorReginputLogin = document.querySelector("#reg-vendor-phone");
+    var VendorinputLogin = document.querySelector("#vendor-phone");
+        var itilogin = window.intlTelInput(VendorinputLogin,{
+            separateDialCode : true
+        });
+        $('#vendor-phone').on('keyup change',function () {
+            $('#vendor-phone-text').val(itilogin.getNumber());
+        });
+        $('#vendor-phone-btn').on('click tap',function () {
+            console.log(itilogin.getNumber());
+            $('#vendor-phone-text').val(itilogin.getNumber());
+            $('#vendor-phone-form').submit();
+        })
+        var VendorReginputLogin = document.querySelector("#reg-vendor-phone");
         var iti = window.intlTelInput(VendorReginputLogin,{
             separateDialCode : true
         });
@@ -256,6 +268,7 @@ $(function() {
             $('#recaptcha-div').show();
 
         });
+
         $('#reg-vendor-phone-btn').on('click tap',function () {
         $('#reg-vendor-phone-text').val(iti.getNumber());
         if(registerValidator()){
